@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <%- typeof linkTags !== 'undefined' ? linkTags : '' %>
+</head>
+<body>
+  <div id="root"><%- typeof root !== 'undefined' ? root : '' %></div>
+  <%- typeof scriptTags !== 'undefined' ? scriptTags : '' %>
+  <% if(typeof apiConfig !== 'undefined') { %>
+    <script>
+      window.__API__ = <% if(typeof webpack !== 'undefined') { %><%= apiConfig %><% } else { %><%- apiConfig %><% } %>
+    </script>
+  <% } %>
+  <% if(typeof preloadedState !== 'undefined') { %>
+    <script>
+      window.__PRELOADED_STATE__ = <% if(typeof webpack !== 'undefined') { %><%= preloadedState %><% } else { %><%- preloadedState %><% } %>
+    </script>
+  <% } %>
+</body>
+</html>

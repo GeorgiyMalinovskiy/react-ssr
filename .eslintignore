@@ -1,0 +1,6 @@
+/scripts/**
+/dist/**
+/src/**/__tests__/**
+/**/*.html
+/**/*.ejs
+/*.js
