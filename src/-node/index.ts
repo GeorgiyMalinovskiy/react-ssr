@@ -5,6 +5,7 @@ import nodePath from 'path';
 import express, { Request, Response } from 'express';
 import serialize from 'serialize-javascript';
 import jsonServer from 'json-server';
+import { ServerStyleSheets } from '@material-ui/core/styles';
 
 import { createElement, FC } from 'react';
 import { Dispatch } from 'redux';
@@ -87,12 +88,16 @@ const IS_PROD = NODE_ENV === 'production';
         const store = createStore();
         await loadBranchData(req.url, store.dispatch);
         const preloadedState = store.getState();
-        const RootElement = createElement(
-          Root as FC<RootType>,
-          {
-            store,
-            Router: StaticRouter,
-          },
+
+        const sheets = new ServerStyleSheets();
+        const RootElement = sheets.collect(
+          createElement(
+              Root as FC<RootType>,
+              {
+                store,
+                Router: StaticRouter,
+              },
+          ),
         );
 
         const webExtractor = new ChunkExtractor({ statsFile: webStats });

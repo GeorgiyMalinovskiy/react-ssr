@@ -1,12 +1,14 @@
 import React, { FC, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core';
 
 import { isPreloadedStatePresent } from 'store/state';
 import routes from 'router/routes';
-import NavLoader from 'router/components/NavLoader';
 
 import { Root as OwnProps } from './utils';
+
+const theme = createMuiTheme();
 
 // TODO add https://fb.me/react-error-boundaries
 const Root: FC<OwnProps> = ({
@@ -24,11 +26,11 @@ const Root: FC<OwnProps> = ({
 
   return (
     <Provider store={store}>
-      <Router>
-        <NavLoader routes={routes}>
+      <ThemeProvider theme={theme}>
+        <Router>
           {renderRoutes(routes)}
-        </NavLoader>
-      </Router>
+        </Router>
+      </ThemeProvider>
     </Provider>
   );
 };
